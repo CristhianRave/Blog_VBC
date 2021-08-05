@@ -1,0 +1,51 @@
+{% extends 'layouts\layout.html' %}
+
+
+{% block content %}
+<div class="page-blog">
+    <div class="main-categories">
+        <div class="main-categories__category">
+            {% include 'posts/for_categories.html' %}
+        </div>
+
+        <div class="create-article-menu">
+            <a href="{% url 'Blog' %}">
+                Atras
+            </a>
+        </div>
+    </div>
+
+    <div class="create-article">
+        <form class="form" method="post" enctype="multipart/form-data" > <!-- Conf para imagen -->
+            {% csrf_token %}
+            <input type="hidden" id="user" name="user" value="{{user.id}}">
+
+            <div>
+                <div>
+                    <h3>{{form.title.label}}</h3>
+                    {{form.title}}
+                </div>
+                <div>
+                    <h3>{{form.content.label}}</h3>
+                    {{form.content}}
+                </div>
+            </div>
+            <div>
+                <div>
+                    <h3>{{form.categories.label}}</h3>
+                    {{form.categories}}
+                </div>
+            </div>
+            <div>
+                <h3>{{form.image.label}}</h3>
+                {{form.image}}
+            </div>
+
+            <div class="form-submit">
+                <input class="form-input" type="submit" value="Guardar">
+            </div>
+        </form>
+
+    </div>
+</div>
+{% endblock %}

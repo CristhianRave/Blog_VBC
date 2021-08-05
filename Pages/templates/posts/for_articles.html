@@ -1,0 +1,29 @@
+{% load static %}
+
+{% for article in articles %}
+
+<a href="{% url 'Article_Individual' slug=article.slug %}" Class="article">
+    <h2 class="article-title"> {{article.title.upper}}</h2>
+
+    
+    <!-- No mostrar imagen por default cuando el articulo no la contiene -->
+    
+    {% if article.image != 'null' and article.image.url|length >= 1 %}
+    <div class="article-box-image">
+        <img src="{{article.image.url}}">
+    </div>
+    {% else %}
+    <!-- Mostrar imagen estatica si no tiene -->
+    <div class="article-box-image">
+        <img src="{% static 'img/fondo.jpg'%}">
+    </div>
+    {% endif %}
+    <!-- ------------------------------------------------------------ -->
+    
+    <div class="article-date">
+        <h4>Creado por: </h4>
+        {{article.user}}
+    </div>
+</a>
+
+{% endfor %}

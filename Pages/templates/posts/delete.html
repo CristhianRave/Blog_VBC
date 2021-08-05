@@ -1,0 +1,6 @@
+<form action="{% url 'Eliminar-articulo' slug=blog.slug %}" method="POST">
+    {% csrf_token %}
+    <button id="borrar" type="submit">Borrar</button>
+</form>
+
+

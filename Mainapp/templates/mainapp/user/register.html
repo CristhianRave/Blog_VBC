@@ -1,0 +1,31 @@
+{% extends 'layouts\layout.html' %}
+
+{% block title %} {{title}} {% endblock %}
+{% block content %}
+
+<div class="content-register">
+    <div>
+        <h1 class="title-register">REGISTRO</h1>
+    </div>
+
+    <form class="form-register" method="post" action="">
+        <div class="errors-register">
+            <div>
+                {{form.errors}}
+            </div>
+        </div>
+        {% csrf_token %}
+
+        <div Class="box-form-register">
+            {% for g in form %}
+            <div class="box-register">
+                <p class="form-label-register">{{g.label}}</p>
+                <div>{{g}}</div>
+            </div>
+            {% endfor %}
+        </div>
+        <input class="botton-article-individual-edita" type="submit" value="Registrarse">
+    </form>
+</div>
+
+{% endblock %}

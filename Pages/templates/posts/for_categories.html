@@ -1,0 +1,13 @@
+<h2 class="title-categories">Categorias : </h2>
+<ul>
+    <li>
+        <a href="{% url 'Blog' %}">Todos</a>
+    </li>
+
+    {% for c in categories %}
+    <li>
+        <a href="{% url 'Category' c.0  %}">{{c.1}}</a>
+    </li>
+    {% endfor %}
+</ul>
+

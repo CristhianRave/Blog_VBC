@@ -1,0 +1,82 @@
+{% extends 'layouts/layout.html' %}
+{% load static %}
+
+{% block title %}
+{{blog.title}}
+{% endblock %}
+
+{% block content %}
+<div class="page-blog">
+    <div class="main-categories">
+        <div class="main-categories__category">
+            {% include 'posts/for_categories.html' %}
+        </div>
+
+        <a href="{% url 'Blog' %}">
+        <div class="create-article-menu">
+                Atras
+            </a>
+        </div>
+    </div>
+
+
+    <div class="article-individual">
+
+        <div class="date-individual">
+
+            <div class="title-article-individual">
+                <h1>{{blog.title}}</h1>
+            </div>
+
+            <div class="date-individual-categories">
+                <h3 class="date-content-title">Categoria :</h3>
+                {% for category in blog.categories.all %}
+                <p class="date-content">{{category}}</p>
+                <!-- Separador de categorias -->
+<!--                 {% if forloop.counter < blog.categories.all|length %} {{'-'}} 
+                {% endif %}  -->
+                {% endfor %} 
+            </div>
+
+            <div class="box-image-individual">
+                {% if blog.image %}
+                    <img class="image-individual" src="{{blog.image.url}}"> 
+                {% else %}
+                    <img class="image-individual" src="{% static 'img/fondo.jpg'%}" >
+                {% endif %}
+            </div>
+
+            <div class="box-date-info">
+                <div Class="date-info">
+                    <h3 class="date-content-title">Creado por: </h3>
+                    <p class="date-content">{{blog.user}}</p>
+                </div>
+                <div Class="date-info">
+                    <h3 class="date-content-title">Creado el: </h3>
+                    <p class="date-content">{{blog.created_at}}</p>
+                </div>
+                <div Class="date-info">
+                    <h3 class="date-content-title">Actualizado el: </h3>
+                    <p class="date-content">{{blog.updated_at}}</p>
+                </div>
+            </div>
+
+            <div class="date-content-box">
+                <h3 class="date-content-title">Contenido: </h3>
+                <p class="date-content">{{blog.content|safe}}</p>
+            </div>
+        </div>
+
+        <!-- content ---- Usamos el safe para que el ckeditor se formatee bien en la web-->
+        <div class="box-bottons-article">
+
+            <a class="botton-article-individual" href="{% url 'Editar' slug=blog.slug %}">
+                <div>Editar</div>
+            </a>
+            <a class="botton-article-individual">
+                {% include 'posts/delete.html' %}
+            </a>
+        </div>
+    </div>
+</div>
+{% endblock %}
